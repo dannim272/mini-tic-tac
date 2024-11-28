@@ -1,13 +1,7 @@
 #include "iostream"
 #include "cstdlib"
 
-bool board(int x, int y, char Player2Symbol, char Player1Symbol, bool Player1_turn){
-    char brd[3][3] = {
-        {'-', '-', '-'},
-        {'-', '-', '-'},
-        {'-', '-', '-'}
-    };
-
+bool board(int x, int y, char Player2Symbol, char Player1Symbol, bool Player1_turn, char brd[3][3]){
     if(Player1_turn){
         brd[x-1][y-1] = Player1Symbol;
     }
@@ -68,6 +62,11 @@ bool verify(int x, int y){
 }
 
 int main(){
+    char brd[3][3] = {
+        {'-', '-', '-'},
+        {'-', '-', '-'},
+        {'-', '-', '-'}
+    };
     std::string PlayerName1;
     std::string PlayerName2;
     char Player1Symbol;
@@ -139,7 +138,7 @@ int main(){
                 std::cin >> y;
             };
         };
-        Player1_turn = board(x, y, Player2Symbol, Player1Symbol, Player1_turn);
+        Player1_turn = board(x, y, Player2Symbol, Player1Symbol, Player1_turn, brd);
         go += 1;
     };
 
