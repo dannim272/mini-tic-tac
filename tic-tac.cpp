@@ -1,14 +1,19 @@
 #include "iostream"
 #include "cstdlib"
 
-void board(int x, int y, char Player2Symbol, char Player1Symbol){
+bool board(int x, int y, char Player2Symbol, char Player1Symbol, bool Player1_turn){
     char brd[3][3] = {
         {'-', '-', '-'},
         {'-', '-', '-'},
         {'-', '-', '-'}
     };
 
-    brd[x-1][y-1] = Player2Symbol;
+    if(!Player1_turn){
+        brd[x-1][y-1] = Player2Symbol;
+    }
+    else {
+        brd[x-1][y-1] = Player1Symbol;
+    };
 
     for (int i=0; i<2; i++){
         for (int a=0; a<3; a++){
@@ -42,6 +47,14 @@ void board(int x, int y, char Player2Symbol, char Player1Symbol){
         std::cout << "\n";
     };
     std::cout << " " << "|" << " " << "|";
+    if(Player1_turn){
+        Player1_turn = false;
+    }
+    else {
+        Player1_turn = true;
+    };
+    return Player1_turn;
+    std::cout << "\n";
 }
 
 bool verify(int x, int y){
@@ -61,6 +74,8 @@ int main(){
     int x;
     int y;
     bool invalidSym = true;
+    int go = 0;
+    bool Player1_turn = false;
 
     std::cout << "Player1 enter your name: ";
     std::cin >> PlayerName1;
@@ -90,23 +105,45 @@ int main(){
         case 'o':
             Player2Symbol = 'x';
             break;
-    }
-
-    std::cout << PlayerName2 << " enter coordinates\n";
-    std::cout << "-> ";
-    std::cin >> x;
-    std::cout << "-> ";
-    std::cin >> y;
-
-    while (!verify(x, y)){
-        std::cout << "Invalid coordinates, enter again\n";
-        std::cout << "-> ";
-        std::cin >> x;
-        std::cout << "-> ";
-        std::cin >> y;
     };
 
-    board(x,y,Player2Symbol,Player1Symbol);
+    while(go < 10){
+        switch (Player1_turn) {
+            case false:
+                std::cout << PlayerName2 << " enter coordinates\n";
+                std::cout << "-> ";
+                std::cin >> x;
+                std::cout << "-> ";
+                std::cin >> y;
+
+                while (!verify(x, y)){
+                    std::cout << "Invalid coordinates, enter again\n";
+                    std::cout << "-> ";
+                    std::cin >> x;
+                    std::cout << "-> ";
+                    std::cin >> y;
+                };
+                break;
+            case true:
+                std::cout << PlayerName1 << " enter coordinates\n";
+                std::cout << "-> ";
+                std::cin >> x;
+                std::cout << "-> ";
+                std::cin >> y;
+
+                while (!verify(x, y)){
+                    std::cout << "Invalid coordinates, enter again\n";
+                    std::cout << "-> ";
+                    std::cin >> x;
+                    std::cout << "-> ";
+                    std::cin >> y;
+                };
+                break;
+        };
+
+        board(x, y, Player2Symbol, Player1Symbol, Player1_turn);
+        go += 1;
+    };
 
     return 0;
 }
