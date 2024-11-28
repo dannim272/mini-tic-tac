@@ -76,6 +76,7 @@ int main(){
     bool invalidSym = true;
     int go = 0;
     bool Player1_turn = false;
+    bool win = false;
 
     std::cout << "Player1 enter your name: ";
     std::cin >> PlayerName1;
@@ -107,41 +108,78 @@ int main(){
             break;
     };
 
-    while(go < 10){
+    while(go < 10 || !win){
+        if(go >4){
+            if(brd[0][0] == Player2Symbol && brd[0][1] == Player2Symbol && brd[0][2] == Player2Symbol){
+                std::cout << PlayerName1 << " won!";
+            };
+            if(brd[1][0] == Player2Symbol && brd[1][1] == Player2Symbol && brd[1][2] == Player2Symbol){
+                std::cout << PlayerName1 << " won!";
+            };
+            if(brd[2][0] == Player2Symbol && brd[2][1] == Player2Symbol && brd[2][2] == Player2Symbol){
+                std::cout << PlayerName1 << " won!";
+            };
+            if(brd[0][0] == Player2Symbol && brd[1][0] == Player2Symbol && brd[2][0] == Player2Symbol){
+                std::cout << PlayerName1 << " won!";
+            };
+            if(brd[0][1] == Player2Symbol && brd[1][1] == Player2Symbol && brd[2][1] == Player2Symbol){
+                std::cout << PlayerName1 << " won!";
+            };
+            if(brd[0][2] == Player2Symbol && brd[1][2] == Player2Symbol && brd[2][2] == Player2Symbol){
+                std::cout << PlayerName1 << " won!";
+            };
+
+            if(brd[0][0] == Player1Symbol && brd[0][1] == Player1Symbol && brd[0][2] == Player1Symbol){
+                std::cout << PlayerName2 << " won!";
+            };
+            if(brd[1][0] == Player1Symbol && brd[1][1] == Player2Symbol && brd[1][2] == Player1Symbol){
+                std::cout << PlayerName2 << " won!";
+            };
+            if(brd[2][0] == Player1Symbol && brd[2][1] == Player2Symbol && brd[2][2] == Player1Symbol){
+                std::cout << PlayerName2 << " won!";
+            };
+            if(brd[0][0] == Player1Symbol && brd[1][0] == Player2Symbol && brd[2][0] == Player1Symbol){
+                std::cout << PlayerName2 << " won!";
+            };
+            if(brd[0][1] == Player1Symbol && brd[1][1] == Player2Symbol && brd[2][1] == Player1Symbol){
+                std::cout << PlayerName2 << " won!";
+            };
+            if(brd[0][2] == Player1Symbol && brd[1][2] == Player2Symbol && brd[2][2] == Player1Symbol){
+                std::cout << PlayerName2 << " won!";
+            };
+            return 0;
+        }
         if(!Player1_turn){
             std::cout << PlayerName1 << " enter coordinates\n";
-            std::cout << "-> ";
+            std::cout << "row -> ";
             std::cin >> x;
-            std::cout << "-> ";
+            std::cout << "column -> ";
             std::cin >> y;
 
             while (!verify(x, y)){
                 std::cout << "Invalid coordinates, enter again\n";
-                std::cout << "-> ";
+                std::cout << "row -> ";
                 std::cin >> x;
-                std::cout << "-> ";
+                std::cout << "column -> ";
                 std::cin >> y;
             };
         }
         else {
             std::cout << PlayerName2 << " enter coordinates\n";
-            std::cout << "-> ";
+            std::cout << "row -> ";
             std::cin >> x;
-            std::cout << "-> ";
+            std::cout << "column -> ";
             std::cin >> y;
 
             while (!verify(x, y)){
                 std::cout << "Invalid coordinates, enter again\n";
-                std::cout << "-> ";
+                std::cout << "row -> ";
                 std::cin >> x;
-                std::cout << "-> ";
+                std::cout << "column -> ";
                 std::cin >> y;
             };
         };
         Player1_turn = board(x, y, Player2Symbol, Player1Symbol, Player1_turn, brd);
         go += 1;
     };
-
-
-    return 0;
 }
