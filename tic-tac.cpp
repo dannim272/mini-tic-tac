@@ -109,7 +109,6 @@ int main(){
     };
 
     while(go < 10){
-        std::cout << go << " and " << Player1_turn << "\n";
         if(!Player1_turn){
             std::cout << PlayerName1 << " enter coordinates\n";
             std::cout << "-> ";
