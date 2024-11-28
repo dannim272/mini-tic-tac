@@ -10,6 +10,8 @@
 - track which player's turn it is properly 
     - **kinda but not really, know what i mean?** 
 
+### v.'nice' - nice (ironic that its not the same push, haha)
+
 to compile with custom name:
 ```bash
 g++ tic-tac.cpp -o custom_name
